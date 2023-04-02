@@ -20,7 +20,8 @@ public class PlayerAnimationController : MonoBehaviour
         float horInput = Input.GetAxis("Horizontal");
         float verInput = Input.GetAxis("Vertical");
 
-        if(Input.GetKey(KeyCode.JoystickButton4))
+        bool isStrafing = Input.GetKey(KeyCode.JoystickButton4) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E);
+        if (isStrafing)
         {
             animator.SetFloat("VelocityX", horInput*2);
             animator.SetFloat("VelocityZ", verInput*2);

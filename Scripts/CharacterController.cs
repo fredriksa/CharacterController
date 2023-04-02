@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TreeEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -36,7 +35,8 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         HandleInput();
-        if(Input.GetKey(KeyCode.JoystickButton4))
+        bool isStrafing = Input.GetKey(KeyCode.JoystickButton4) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E);
+        if (isStrafing)
         {
             Vector3 newOrientation= new Vector3(transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, transform.eulerAngles.z);
             rigidBody.MoveRotation(Quaternion.Euler(newOrientation));
@@ -74,7 +74,8 @@ public class CharacterController : MonoBehaviour
     private void FixedUpdate()
     {
         MoveCharacter();
-        if(Input.GetKey(KeyCode.JoystickButton0) && checker.InContact)
+        bool wantsToJump = Input.GetKey(KeyCode.JoystickButton0) || Input.GetKey(KeyCode.Space);
+        if (wantsToJump && checker.InContact)
         {
             Jump();
         }
